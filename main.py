@@ -48,3 +48,12 @@ async def all_subs(channel_id: str | None = None, playlist_id: str | None = None
         playlist_videos = await session.exec(select_playlist)
         result = playlist_videos.scalars().all()
     return {"results": result}
+
+
+# Get channel names
+@app.get("/channels")
+async def all_channels(session: AsyncSession = Depends(get_db)):
+    statement = select(Subtitle.channel_name).distinct()
+    channels = await session.exec(statement)
+    result = channels.scalars().all()
+    return {"results": result}
