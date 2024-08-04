@@ -29,10 +29,10 @@ def get_subtitle(video_id, user_prompt="", system_prompt=""):
             return response_data['result']
         else:
             # If the API call was not successful, raise an HTTPException
-            raise HTTPException(status_code=response.status_code, detail="Failed to fetch subtitle from cloud function")
+            raise HTTPException(status_code=response.status_code, result="Failed to fetch subtitle from cloud function")
     else:
         print("Cloud function URL not found!")
-        return None
+        raise HTTPException(status_code=500, result="Issue locating cloud function URL")
 
 # Get video meta data from Youtube API
 def request_video_info(video_id):

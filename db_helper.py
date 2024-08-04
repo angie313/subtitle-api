@@ -49,3 +49,5 @@ async def insert_video_sub(session: AsyncSession, video_id, zh_txt=None, en_txt=
         except Exception as e:
             await session.rollback()
             raise HTTPException(status_code=500, detail=f"An error occurred while adding the item: {str(e)}")
+    else:
+        raise HTTPException(status_code=404, result="Video meta data not found")
